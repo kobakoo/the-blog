@@ -2,6 +2,9 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    amp: {
+      skipValidation: true,
+    },
   },
   images: {
     domains: ["firebasestorage.googleapis.com"],

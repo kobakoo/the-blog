@@ -14,6 +14,7 @@ import MagicUrl from "quill-magic-url";
 import Header from "@/components/Header";
 import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
+import { useAmp } from "next/amp";
 
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const s3Client = new S3Client({ region: "ap-northeast-1" }); // 例: 'us-east-1'
@@ -31,7 +32,7 @@ export default function MyComponent() {
   const [profileImage, setProfileImage] = useState(
     "https://firebasestorage.googleapis.com/v0/b/blog-kobako.appspot.com/o/default.jpg?alt=media&token=06d68b5f-7363-4305-8684-387a95fa1624"
   );
-
+  const isAmp = useAmp();
   const onChangeFile = (e) => {
     const files = e.target.files;
     if (files && files[0]) {
@@ -123,6 +124,8 @@ export default function MyComponent() {
     const MAX_LENGTH = 158;
     const description = text.substr(0, MAX_LENGTH) + "...";
     console.log(description);
+    const dateObject = new Date();
+    // const now = dateObject.toISOString();
     try {
       const docRef = await addDoc(collection(db, "posts"), {
         title: title,
@@ -130,6 +133,7 @@ export default function MyComponent() {
         description: description,
         category: selectedOption,
         thumbnail: profileImage,
+        date: dateObject.toISOString(),
       });
       await console.log("Document written with ID: ", docRef.id);
       toast.success("Document written with ID: ", docRef.id.toString());

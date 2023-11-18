@@ -11,6 +11,10 @@
     "ＭＳ Ｐゴシック", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+.width {
+  @apply sm:mx-auto lg:w-[980px] md:w-[692px] w-11/12 mx-3 max-w-full;
+}
+
 .ql-font-serif {
   @apply font-serif;
 }
@@ -51,6 +55,11 @@
   @apply pl-72;
 }
 
+.no-link {
+  text-underline-offset: 0px;
+  text-decoration-line: none !important;
+}
+
 h1 {
   @apply lg:text-[48px] md:text-[40px] sm:text-[32px] text-3xl lg:font-extrabold font-bold lg:leading-h1-lg md:leading-h1-md leading-h1-sm;
 }
@@ -77,4 +86,8 @@ ol {
 
 img {
   @apply sm:rounded-[10px] rounded-none my-[44px];
+}
+
+blockquote {
+  @apply p-4 my-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
 }
