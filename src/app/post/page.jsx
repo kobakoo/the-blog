@@ -7,11 +7,13 @@ import "react-quill/dist/quill.snow.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { container } from "tsyringe";
-import { storage } from "@/lib/FirebaseConfig";
+import { db, storage } from "@/lib/FirebaseConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import toast, { Toaster } from "react-hot-toast";
 import MagicUrl from "quill-magic-url";
 import Header from "@/components/Header";
+import Image from "next/image";
+import { collection, addDoc } from "firebase/firestore";
 
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const s3Client = new S3Client({ region: "ap-northeast-1" }); // 例: 'us-east-1'
@@ -23,10 +25,12 @@ function CustomIcon() {
 export default function MyComponent() {
   const [value, setValue] = useState(localStorage.getItem("localData"));
   const [title, setTitle] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("others");
   const editorRef = useRef(null);
   const [file, setFile] = useState(null);
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState(
+    "https://firebasestorage.googleapis.com/v0/b/blog-kobako.appspot.com/o/default.jpg?alt=media&token=06d68b5f-7363-4305-8684-387a95fa1624"
+  );
 
   const onChangeFile = (e) => {
     const files = e.target.files;
@@ -47,6 +51,17 @@ export default function MyComponent() {
   // const ref = useRef(null);
 
   Quill.register("modules/magicUrl", MagicUrl);
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const categories = [
+    { name: "tech" },
+    { name: "design" },
+    { name: "news" },
+    { name: "others" },
+  ];
 
   const imageHandler = async () => {
     const input = document.createElement("input");
@@ -89,6 +104,40 @@ export default function MyComponent() {
       }
     };
   };
+
+  async function fileUpload() {
+    const now = new Date();
+    const now2 = now.toISOString();
+    const storageRef = ref(storage, `images/${now2 + file.name}`);
+    await uploadBytes(storageRef, file).then((snapshot) => {
+      console.log(snapshot);
+      toast.success(`画像「${file.name}」は正常にアップロードされました`);
+    });
+    const url = await getDownloadURL(storageRef);
+    setProfileImage(url);
+  }
+
+  async function postBlog() {
+    const txt = value.match(/[^\<\>]+(?=\<[^\<\>]+\>)|[^\<\>]+$/g);
+    const text = txt.join(" ");
+    const MAX_LENGTH = 158;
+    const description = text.substr(0, MAX_LENGTH) + "...";
+    console.log(description);
+    try {
+      const docRef = await addDoc(collection(db, "posts"), {
+        title: title,
+        code: value,
+        description: description,
+        category: selectedOption,
+        thumbnail: profileImage,
+      });
+      await console.log("Document written with ID: ", docRef.id);
+      toast.success("Document written with ID: ", docRef.id.toString());
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      toast.error("Error adding document: ", e);
+    }
+  }
 
   const modules = {
     toolbar: [
@@ -193,7 +242,13 @@ export default function MyComponent() {
           </label>
         </div>
         <div className={profileImage ? "block flex" : "hidden"}>
-          <img src={profileImage} alt="will have uploaded image" className="" />
+          <Image
+            src={profileImage}
+            alt="will have uploaded image"
+            className=""
+            width={1152}
+            height={648}
+          />
           <button
             className="btn btn-circle btn-outline mt-3"
             onClick={() => {
@@ -223,29 +278,41 @@ export default function MyComponent() {
       <h2 className="sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3 max-w-full">
         Category
       </h2>
-      <div className="sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3  max-w-full">
-        <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text text-base">Red pill</span>
-            <input
-              type="radio"
-              name="radio-10"
-              className="radio checked:bg-red-500"
-              checked
-            />
-          </label>
-        </div>
-        <div className="form-control">
+      <div className="sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3  max-w-full mt-5">
+        {categories.map((cat) => (
+          <div className="form-control" key={cat.name}>
+            <label className="label cursor-pointer">
+              <span
+                className={
+                  selectedOption === cat.name
+                    ? `label-text text-base font-bold transition text-[#06c]`
+                    : `label-text text-base transition`
+                }
+              >
+                {cat.name}
+              </span>
+              <input
+                type="radio"
+                value={cat.name}
+                checked={selectedOption === cat.name}
+                onChange={handleOptionChange}
+                className={`radio checked:bg-blue-500`}
+              />
+            </label>
+          </div>
+        ))}
+        {/* <div className="form-control">
           <label className="label cursor-pointer">
             <span className="label-text text-base">Blue pill</span>
             <input
               type="radio"
-              name="radio-10"
+              value="option2"
+              checked={selectedOption === "option2"}
+              onChange={handleOptionChange}
               className="radio checked:bg-blue-500"
-              checked
             />
           </label>
-        </div>
+        </div> */}
       </div>
 
       <h2 className="sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3 max-w-full">
@@ -282,6 +349,27 @@ export default function MyComponent() {
           className="px-6 py-8"
         ></div>
       </div>
+      {profileImage && value && title && selectedOption ? (
+        <div className="sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3  max-w-full mt-6">
+          <button
+            className="btn bg-blue-500 text-white rounded-full btn-sm hover:bg-blue-700 transition my-3"
+            onClick={() => {
+              if (file) {
+                fileUpload();
+              }
+              postBlog();
+            }}
+          >
+            Post
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
+
+export const config = {
+  amp: true,
+};
