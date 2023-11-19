@@ -25,7 +25,7 @@ function Header() {
               The Blog
             </span>
           </Link>
-          <nav className="flex flex-wrap items-center text-base md:ml-auto">
+          <nav className="sm:flex flex-wrap items-center text-base md:ml-auto hidden">
             <Link
               className="mr-5 hover:text-blue-600 text-black transition"
               href="/cat/tech"

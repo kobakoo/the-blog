@@ -7,7 +7,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["firebasestorage.googleapis.com"],
+    domains: ["firebasestorage.googleapis.com","https://kobakoo.com","images.microcms-assets.io"],
   },
 };
 

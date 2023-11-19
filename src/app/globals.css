@@ -60,6 +60,10 @@
   text-decoration-line: none !important;
 }
 
+.w-article {
+  @apply lg:w-[653px] md:w-[583px] w-[362.25px] mx-auto max-w-full;
+}
+
 h1 {
   @apply lg:text-[48px] md:text-[40px] sm:text-[32px] text-3xl lg:font-extrabold font-bold lg:leading-h1-lg md:leading-h1-md leading-h1-sm;
 }
