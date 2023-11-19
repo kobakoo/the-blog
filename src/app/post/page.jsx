@@ -51,48 +51,6 @@ export default function MyComponent() {
     { name: "others" },
   ];
 
-  const imageHandler = async () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    input.onchange = async () => {
-      const file = input.files[0];
-      const now = new Date();
-      const now2 = now.toISOString();
-      // await imageRef.put(file);
-      const storageRef = ref(storage, `images/${now2 + file.name}`);
-
-      // 'file' comes from the Blob or File API
-      await uploadBytes(storageRef, file).then((snapshot) => {
-        toast.success(`画像「${file.name}」は正常にアップロードされました`);
-      });
-
-      // getDownloadURL(storageRef).then((url) => {
-      //   const range = editorRef.current.editor.getSelection();
-      //   // editorRef.current.editor.insertEmbed(range.index, "image", url);
-      //   editorRef.current.editor.clipboard.dangerouslyPasteHTML(
-      //     range.index,
-      //     `<img src="${url}" alt="${file.name}" style="max-width: 100%;" />`
-      //   );
-      //   editorRef.current.editor.setSelection(range.index + 1);
-      // });
-      try {
-        const url = await getDownloadURL(storageRef);
-        if (editorRef.current) {
-          const quill = editorRef.current.getEditor();
-          const range = quill.getSelection();
-          quill.insertEmbed(range.index, "image", url);
-          quill.setSelection(range.index + 1);
-        }
-      } catch (error) {
-        console.error("画像のダウンロード中にエラーが発生しました:", error);
-        // エラー処理
-      }
-    };
-  };
-
   async function fileUpload() {
     const now = new Date();
     const now2 = now.toISOString();
