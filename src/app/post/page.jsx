@@ -2,11 +2,7 @@
 import "reflect-metadata";
 import { useMemo, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
-import { useMutation, gql } from "@apollo/client";
 import "react-quill/dist/quill.snow.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/free-regular-svg-icons";
-import { container } from "tsyringe";
 import { db, storage } from "@/lib/FirebaseConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import toast, { Toaster } from "react-hot-toast";
@@ -14,13 +10,6 @@ import MagicUrl from "quill-magic-url";
 import Header from "@/components/Header";
 import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
-
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
-const s3Client = new S3Client({ region: "ap-northeast-1" }); // 例: 'us-east-1'
-
-function CustomIcon() {
-  return <FontAwesomeIcon icon={faImage} />;
-}
 
 export default function MyComponent() {
   const [value, setValue] = useState(localStorage.getItem("localData"));
