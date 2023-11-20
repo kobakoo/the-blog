@@ -21,7 +21,7 @@ function Header() {
               alt="logo"
               className="m-0.5 w-10 h-6 rounded-none"
             ></Image>
-            <span className="ml-3 text-xl items-center no-underline">
+            <span className="ml-3 text-xl items-center no-underline max-md:font-bold">
               The Blog
             </span>
           </Link>

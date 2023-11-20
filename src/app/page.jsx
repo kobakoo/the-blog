@@ -111,7 +111,7 @@ export default function Home() {
       <div className="bg-[#f5f5f7] min-h-screen">
         <Header />
         <div className="md:mx-0 md:w-auto w-[366px] mx-auto max-w-full">
-          <h2 className="sm:mx-auto lg:w-[980px] md:w-[692px] w-11/12 mx-3 max-w-full mb-6 lg:text-[32px] md:text-[28px] sm:text-[24px]">
+          <h2 className="sm:mx-auto lg:w-[980px] md:w-[692px] w-11/12 mx-3 max-w-full mb-6 lg:text-[32px] md:text-[28px] sm:text-[24px] max-md:font-bold">
             The blog
           </h2>
           <div id="posts" className="width mx-3">

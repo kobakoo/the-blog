@@ -10,6 +10,7 @@ import Image from "next/image";
 function Post(props) {
   const shareData = {
     title: props.data.title,
+    text: props.data.title + "｜KBK",
     url: "https://blog.kobakoo.com/" + props.id,
   };
   const postExist = true;
