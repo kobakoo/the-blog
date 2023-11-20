@@ -1,6 +1,5 @@
-import Head from "next/head";
 import { NextSeo } from "next-seo";
-
+import { Head } from "next/head";
 const Seo = ({
   pageTitle,
   pageDescription,
@@ -23,7 +22,7 @@ const Seo = ({
   const imgHeight = pageImgHeight ? pageImgHeight : 900;
 
   return (
-    <>
+    <Head>
       <NextSeo
         title={title}
         description={description}
@@ -55,7 +54,7 @@ const Seo = ({
           cardType: "summary_large_image",
         }}
       />
-    </>
+    </Head>
   );
 };
 

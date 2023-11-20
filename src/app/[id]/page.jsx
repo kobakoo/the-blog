@@ -6,7 +6,6 @@ import { db } from "@/lib/FirebaseConfig";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import Toaster, { toast } from "react-hot-toast";
 import Seo from "@/components/Seo";
 
 function Page() {
