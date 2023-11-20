@@ -62,12 +62,14 @@ function Page() {
     <div className="bg-[#fff] min-h-screen">
       {/* <Toaster /> */}
       <Seo
-        pageTitle={"site title"}
+        pageTitle={"The blog"}
         pageDescription={`${data.description}`}
         pageImg={`${data.thumbnail}`}
         pageImgWidth={1600}
         pageImgHeight={900}
         pagePath={`https://blog.kobakoo.com/${params.id}`}
+        articleCategory={data.category}
+        articleWhenPublished={data.date}
       />
       <Header />
       {postExist ? (
