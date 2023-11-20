@@ -25,16 +25,23 @@ export async function generateMetadata({ params }) {
       description,
       openGraph: {
         title: siteName,
-        description,
-        url,
-        siteName,
+        description: description,
+        url: url,
+        siteName: siteName,
         locale: "ja_JP",
         type: "website",
+        images: [
+          {
+            url: params.data.thumbnail,
+            width: 1600,
+            height: 900,
+          },
+        ],
       },
       twitter: {
         card: "summary_large_image",
         title: siteName,
-        description,
+        description: description,
         creator: "@kobako0o",
       },
       verification: {
