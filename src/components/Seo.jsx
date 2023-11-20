@@ -23,37 +23,39 @@ const Seo = ({
   const imgHeight = pageImgHeight ? pageImgHeight : 900;
 
   return (
-    <NextSeo
-      title={title}
-      description={description}
-      canonical={url}
-      openGraph={{
-        url: url,
-        title: title,
-        description: description,
-        type: "article",
-        images: [
-          {
-            url: imgUrl,
-            width: imgWidth,
-            height: imgHeight,
-            alt: `Thumbnail ${title}`,
-            type: "image/jpeg",
+    <>
+      <NextSeo
+        title={title}
+        description={description}
+        canonical={url}
+        openGraph={{
+          url: url,
+          title: title,
+          description: description,
+          type: "article",
+          images: [
+            {
+              url: imgUrl,
+              width: imgWidth,
+              height: imgHeight,
+              alt: `Thumbnail ${title}`,
+              type: "image/jpeg",
+            },
+          ],
+          article: {
+            publishedTime: articleWhenPublished,
+            section: "Section II",
+            authors: ["https://www.example.com/authors/@firstnameA-lastnameA"],
+            tags: [articleCategory],
           },
-        ],
-        article: {
-          publishedTime: articleWhenPublished,
-          section: "Section II",
-          authors: ["https://www.example.com/authors/@firstnameA-lastnameA"],
-          tags: [articleCategory],
-        },
-        siteName: "The Blog",
-      }}
-      twitter={{
-        handle: "@koabko0O",
-        cardType: "summary_large_image",
-      }}
-    />
+          siteName: "The Blog",
+        }}
+        twitter={{
+          handle: "@koabko0O",
+          cardType: "summary_large_image",
+        }}
+      />
+    </>
   );
 };
 
