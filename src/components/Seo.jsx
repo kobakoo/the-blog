@@ -1,61 +1,24 @@
-import { NextSeo } from "next-seo";
-import { Head } from "next/head";
-const Seo = ({
-  pageTitle,
-  pageDescription,
-  pagePath,
-  pageImg,
-  pageImgWidth,
-  pageImgHeight,
-  articleCategory,
-  articleWhenPublished,
-}) => {
-  const defaultTitle = "The Blog by kobako";
-  const defaultDescription =
-    "The Blog  by kobako ためになりそうな情報を発信しています";
+import Head from "next/head";
 
-  const title = pageTitle ? `${pageTitle} | ${defaultTitle}` : defaultTitle;
-  const description = pageDescription ? pageDescription : defaultDescription;
-  const url = pagePath;
-  const imgUrl = pageImg;
-  const imgWidth = pageImgWidth ? pageImgWidth : 1200;
-  const imgHeight = pageImgHeight ? pageImgHeight : 900;
-
+export default function Seo(title, description, url, thumbnail) {
+  const pageTitle = title;
+  const ogUrl = url;
+  const ogImage = thumbnail;
   return (
-    <Head>
-      <NextSeo
-        title={title}
-        description={description}
-        canonical={url}
-        openGraph={{
-          url: url,
-          title: title,
-          description: description,
-          type: "article",
-          images: [
-            {
-              url: imgUrl,
-              width: imgWidth,
-              height: imgHeight,
-              alt: `Thumbnail ${title}`,
-              type: "image/jpeg",
-            },
-          ],
-          article: {
-            publishedTime: articleWhenPublished,
-            section: "Section II",
-            authors: ["https://www.example.com/authors/@firstnameA-lastnameA"],
-            tags: [articleCategory],
-          },
-          siteName: "The Blog",
-        }}
-        twitter={{
-          handle: "@koabko0O",
-          cardType: "summary_large_image",
-        }}
-      />
-    </Head>
+    <>
+      <title>{pageTitle}</title>
+      <meta name="description" content={description} />
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={ogUrl} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:site_name" content={pageTitle} />
+      <meta property="og:locale" content={"ja_JP"} />
+      <meta name="twitter:card" content={"summary"} />
+      <meta name="twitter:site" content={"@kobako0o"} />
+      <meta name="twitter:image" content={ogImage} />
+      <link rel="canonical" href={ogUrl} />
+    </>
   );
-};
-
-export default Seo;
+}
