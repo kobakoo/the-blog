@@ -29,10 +29,12 @@ export async function generateMetadata({ params }) {
         url: url,
         siteName: siteName,
         locale: "ja_JP",
-        type: "website",
+        type: "article",
+        publishedTime: data.date,
+        authors: ["Kobako"],
         images: [
           {
-            url: params.data.thumbnail,
+            url: data.thumbnail,
             width: 1600,
             height: 900,
           },
@@ -43,6 +45,7 @@ export async function generateMetadata({ params }) {
         title: siteName,
         description: description,
         creator: "@kobako0o",
+        images: [`${data.thumbnail}`],
       },
       verification: {
         google: "ncVLbtSbqBm70UjMc0zTd2TFhTBnEAVXNmXHxPyWs5w",
