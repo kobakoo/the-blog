@@ -21,7 +21,7 @@ function Footer() {
           </ul>
           <footer className="footer text-neutral-content min-w-full max-md:flex max-md:flex-wrap max-md:flex-row">
             <nav>
-              <header className="footer-title text-black opacity-0">
+              <header className="footer-title text-black opacity-100">
                 Category
               </header>
               <Link
@@ -50,7 +50,7 @@ function Footer() {
               </Link>
             </nav>
             <nav>
-              <header className="footer-title text-black opacity-0">
+              <header className="footer-title text-black opacity-100">
                 Homepage
               </header>
               <Link
@@ -76,7 +76,7 @@ function Footer() {
               </Link>
             </nav>
             <nav>
-              <header className="footer-title text-black opacity-0">
+              <header className="footer-title text-black opacity-100">
                 Legal
               </header>
               {/* <Link
