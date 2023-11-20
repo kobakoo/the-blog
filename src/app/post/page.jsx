@@ -1,18 +1,24 @@
 "use client";
 import "reflect-metadata";
 import { useMemo, useRef, useState } from "react";
-import ReactQuill, { Quill } from "react-quill";
+// import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { db, storage } from "@/lib/FirebaseConfig";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import toast, { Toaster } from "react-hot-toast";
-import MagicUrl from "quill-magic-url";
 import Header from "@/components/Header";
 import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(
+  () => {
+    return import("react-quill");
+  },
+  { ssr: false }
+);
 
 export default function MyComponent() {
-  const [value, setValue] = useState(localStorage.getItem("localData"));
+  const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [selectedOption, setSelectedOption] = useState("others");
   const editorRef = useRef(null);
@@ -37,8 +43,6 @@ export default function MyComponent() {
   // });
 
   // const ref = useRef(null);
-
-  Quill.register("modules/magicUrl", MagicUrl);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -109,7 +113,6 @@ export default function MyComponent() {
       //   image: function () {},
       // },
     ],
-    magicUrl: true,
   };
 
   const formats = [
