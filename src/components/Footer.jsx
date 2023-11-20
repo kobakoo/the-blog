@@ -21,7 +21,9 @@ function Footer() {
           </ul>
           <footer className="footer text-neutral-content min-w-full max-md:flex max-md:flex-wrap max-md:flex-row">
             <nav>
-              <header className="footer-title text-black">Category</header>
+              <header className="footer-title text-black opacity-0">
+                Category
+              </header>
               <Link
                 className="link link-hover text-black hover:text-blue-500"
                 href="/cat/tech"
@@ -48,7 +50,9 @@ function Footer() {
               </Link>
             </nav>
             <nav>
-              <header className="footer-title text-black">Homepage</header>
+              <header className="footer-title text-black opacity-0">
+                Homepage
+              </header>
               <Link
                 className="link link-hover text-black hover:text-blue-500"
                 href="https://kobakoo.com"
@@ -72,7 +76,9 @@ function Footer() {
               </Link>
             </nav>
             <nav>
-              <header className="footer-title text-black">Legal</header>
+              <header className="footer-title text-black opacity-0">
+                Legal
+              </header>
               {/* <Link
               className="link link-hover text-black hover:text-blue-500"
               href=""
