@@ -85,7 +85,7 @@ function Post(props) {
                     className="w-5 h-5 mr-6 max-md:hidden mt-1"
                     onClick={() => {
                       let newwin = open(
-                        `http://twitter.com/share?url=https://blog.kobakoo.com/${props.id}&related=@kobako0o`
+                        `http://twitter.com/share?url=https://blog.kobakoo.com/${props.id}&related=@kobako0o&text=${props.data.title}`
                       );
                     }}
                   >
