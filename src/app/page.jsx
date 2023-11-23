@@ -28,7 +28,11 @@ export default function Home() {
 
   useEffect(() => {
     const postsRef = collection(db, "posts");
-    const firstPostQuery = query(postsRef, orderBy("date"), limit(1));
+    const firstPostQuery = query(
+      postsRef,
+      orderBy("date","desc"),
+      limit(1)
+    );
     getDocs(firstPostQuery).then((snapshot) => {
       let firstPost = {};
       snapshot.docs.forEach((doc) => {
@@ -40,7 +44,11 @@ export default function Home() {
         console.log(firstPost);
       });
     });
-    const topPostQuery = query(postsRef, orderBy("date"), limit(5));
+    const topPostQuery = query(
+      postsRef,
+      orderBy("date", "desc"),
+      limit(5)
+    );
     getDocs(topPostQuery).then((snapshot) => {
       let topPosts = [];
       snapshot.docs.forEach((doc) => {
@@ -54,7 +62,11 @@ export default function Home() {
       console.log(topPosts);
     });
 
-    const secondPostQuery = query(postsRef, orderBy("date"), limit(11));
+    const secondPostQuery = query(
+      postsRef,
+      orderBy("date","desc"),
+      limit(11)
+    );
     getDocs(secondPostQuery).then((snapshot) => {
       let secondPosts = [];
       snapshot.docs.forEach((doc) => {
@@ -70,7 +82,11 @@ export default function Home() {
       console.log(secondPosts);
     });
 
-    const otherPostQuery = query(postsRef, orderBy("date"), limit(19));
+    const otherPostQuery = query(
+      postsRef,
+      orderBy("date","desc"),
+      limit(19)
+    );
     getDocs(otherPostQuery).then((snapshot) => {
       let otherPosts = [];
       snapshot.docs.forEach((doc) => {

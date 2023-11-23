@@ -15,6 +15,7 @@ export async function generateMetadata({ params }) {
     const description = data.description;
     const url = `https://blog.kobakoo.com/${id}`;
     const siteName = data.title;
+    const category = data.category;
     return {
       metadataBase: new URL("https://blog.kobakoo.com"),
       title: {
@@ -22,7 +23,9 @@ export async function generateMetadata({ params }) {
         /** `next-seo`の`titleTemplate`に相当する機能 */
         template: `%s - The Blog`,
       },
-      description,
+      description: description,
+      category: category,
+      authors: ["Kobako"],
       openGraph: {
         title: siteName,
         description: description,
@@ -52,6 +55,19 @@ export async function generateMetadata({ params }) {
       },
       alternates: {
         canonical: url,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          imageindex: true,
+          "max-video-preview": -1,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+        },
       },
     };
   } else {

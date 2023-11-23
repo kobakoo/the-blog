@@ -1,8 +1,61 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "The blog",
-  description: "小箱のブログです",
+  title: {
+    template: "%s | KBK Blog",
+    default: "The Blog", // a default is required when creating a template
+  },
+  description:
+    "The Blog｜コバコが書く雑記ブログです。コバコはいつでもあなたを待っています",
+  generator: "Next.js",
+  applicationName: "The Blog",
+  referrer: "origin-when-cross-origin",
+  keywords: [
+    "Next.js",
+    "Design",
+    "JavaScript",
+    "Tech",
+    "Technology",
+    "kobako",
+    "道徳は暗記科目",
+    "コバコ",
+    "簡単",
+    "便利",
+    "chatgpt",
+    "iphone",
+    "ツイッター",
+    "チャットgpt",
+  ],
+  authors: [{ name: "Kobako", url: "https://kobakoo.com" }],
+  creator: "Ryusei Kobayashi",
+  publisher: "Ryusei Kobayashi",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://blog.kobakoo.com"),
+  openGraph: {
+    title: "The Blog",
+    description:
+      "The Blog｜コバコが書く雑記ブログです。コバコはいつでもあなたを待っています",
+    type: "website",
+    publishedTime: "Thu Nov 23 2023",
+    authors: ["Kobako"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      imageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {

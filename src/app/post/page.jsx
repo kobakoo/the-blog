@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
+
 const ReactQuill = dynamic(
   () => {
     return import("react-quill");

@@ -2,12 +2,13 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    amp: {
-      skipValidation: true,
-    },
   },
   images: {
-    domains: ["firebasestorage.googleapis.com","https://kobakoo.com","images.microcms-assets.io"],
+    domains: [
+      "firebasestorage.googleapis.com",
+      "https://kobakoo.com",
+      "images.microcms-assets.io",
+    ],
   },
 };
 

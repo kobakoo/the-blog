@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 function Header() {
   const router = useRouter();
   return (
-    <div className="sticky top-0 z-30 bg-white">
+    <div className="sticky top-0 z-30">
       <header className="text-gray-600 body-font glass">
         <div className="container mx-auto flex p-3 items-center justify-between lg:w-[1000px] md:w-[724px] sm:w-[675px] max-w-full">
           <Link
