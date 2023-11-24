@@ -205,8 +205,8 @@ export default function MyComponent() {
           <button
             className="btn btn-circle btn-outline mt-3"
             onClick={() => {
-              setFile(null);
-              setProfileImage(null);
+              setFile("");
+              setProfileImage("");
               toast.success("Uploaded image has been deleted!");
             }}
           >
