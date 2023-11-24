@@ -34,6 +34,8 @@ function Post(props) {
     alert("urlをコピーできました!");
   };
 
+  const router = useRouter();
+
   return (
     <div className="bg-[#fff] min-h-screen">
       {/* <Toaster /> */}

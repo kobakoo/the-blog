@@ -2,7 +2,6 @@ import Post from "@/components/Post";
 import { db } from "@/lib/FirebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import React from "react";
-import { cache } from "react";
 
 export async function generateMetadata({ params }) {
   // read route params
