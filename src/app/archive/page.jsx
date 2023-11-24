@@ -7,12 +7,14 @@ import { useSearchParams } from "next/navigation";
 import { LazyMotion, domAnimation, motion } from "framer-motion";
 import Image from "next/image";
 import Footer from "@/components/Footer";
+import { useRouter } from "next/navigation";
 
 function Page() {
   const [posts, setPosts] = useState([]);
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
   const scrollRef = useRef(null);
+  const router = useRouter();
 
   async function getData() {
     const q = query(collection(db, "posts"), orderBy("date", "desc"));
