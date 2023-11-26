@@ -131,7 +131,7 @@ export default function Home() {
                   <div
                     className={`lg:basis-[643px] md:basis-[453px] bg-cover md:h-full lg:min-h-[362px] md:min-h-[255px] sm:min-h-auto bg-center md:rounded-l-2xl  md:rounded-tr-none  rounded-t-lg transition hover:after:scale-110 max-w-full h-full min-h-[200px]`}
                     style={{
-                      backgroundImage: `url(${first.thumbnail})`,
+                      backgroundImage: `url("${first.thumbnail}")`,
                       transform:
                         "transform 400ms cubic-bezier(0.4, 0, 0.25, 1) 0ms,opacity 1s cubic-bezier(0.4, 0, 0.25, 1) 0ms",
                     }}

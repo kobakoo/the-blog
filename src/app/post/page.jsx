@@ -62,13 +62,15 @@ export default function MyComponent() {
     await uploadBytes(storageRef, file).then((snapshot) => {
       console.log(snapshot);
       toast.success(`画像「${file.name}」は正常にアップロードされました`);
-      getDownloadURL(snapshot.ref).then((url) => {
+      getDownloadURL(ref(storage, snapshot.metadata.fullPath)).then((url) => {
+        console.log(url);
         setProfileImage(url);
+        postBlog(url);
       });
     });
   }
 
-  async function postBlog() {
+  async function postBlog(url) {
     const txt = value.match(/[^\<\>]+(?=\<[^\<\>]+\>)|[^\<\>]+$/g);
     const text = txt.join(" ");
     const MAX_LENGTH = 158;
@@ -77,16 +79,29 @@ export default function MyComponent() {
     const dateObject = new Date();
     // const now = dateObject.toISOString();
     try {
-      const docRef = await addDoc(collection(db, "posts"), {
-        title: title,
-        code: value,
-        description: description,
-        category: selectedOption,
-        thumbnail: profileImage,
-        date: dateObject.toISOString(),
-      });
-      await console.log("Document written with ID: ", docRef.id);
-      toast.success("Document written with ID: ", docRef.id.toString());
+      if (file) {
+        const docRef = await addDoc(collection(db, "posts"), {
+          title: title,
+          code: value,
+          description: description,
+          category: selectedOption,
+          thumbnail: url,
+          date: dateObject.toISOString(),
+        });
+        await console.log("Document written with ID: ", docRef.id);
+        toast.success("Document written with ID: ", docRef.id.toString());
+      } else {
+        const docRef = await addDoc(collection(db, "posts"), {
+          title: title,
+          code: value,
+          description: description,
+          category: selectedOption,
+          thumbnail: profileImage,
+          date: dateObject.toISOString(),
+        });
+        await console.log("Document written with ID: ", docRef.id);
+        toast.success("Document written with ID: ", docRef.id.toString());
+      }
     } catch (e) {
       console.error("Error adding document: ", e);
       toast.error("Error adding document: ", e);
@@ -204,7 +219,7 @@ export default function MyComponent() {
           <button
             className="btn btn-circle btn-outline mt-3"
             onClick={() => {
-              setFile("");
+              setFile(null);
               setProfileImage("");
               toast.success("Uploaded image has been deleted!");
             }}
@@ -308,11 +323,12 @@ export default function MyComponent() {
         <div className="sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3  max-w-full mt-6">
           <button
             className="btn bg-blue-500 text-white rounded-full btn-sm hover:bg-blue-700 transition my-3"
-            onClick={async () => {
+            onClick={() => {
               if (file) {
-                await fileUpload();
+                fileUpload();
+              } else {
+                postBlog();
               }
-              postBlog();
             }}
           >
             Post
