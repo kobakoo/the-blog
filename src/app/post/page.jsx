@@ -10,6 +10,12 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
+import "prismjs/themes/prism.css";
+import Prism from "prismjs";
+
+// 必要な言語のコンポーネントをインポート
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-css";
 
 const ReactQuill = dynamic(
   () => {
@@ -106,10 +112,8 @@ export default function MyComponent() {
         { indent: "+1" },
       ],
       ["link"],
-      [
-        // [{ handlers: { image: selectLocalImage } }],
-        "clean",
-      ],
+      ["code-block"],
+      ["clean"],
       // handlers: {
       //   image: function () {},
       // },
@@ -128,7 +132,7 @@ export default function MyComponent() {
     "bullet",
     "indent",
     "link",
-    "image",
+    "code-block",
   ];
   return (
     <div>
@@ -275,7 +279,11 @@ export default function MyComponent() {
         key="quill-editor"
         theme="snow"
         value={value}
-        onChange={setValue}
+        onChange={(content, delta, source, editor) => {
+          const textValue = content;
+          setValue(textValue);
+          Prism.highlightAll();
+        }}
         modules={modules}
         formats={formats}
         ref={editorRef}
@@ -285,7 +293,7 @@ export default function MyComponent() {
         Code
       </h2>
       <div className="mockup-code mt-6 sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3 max-w-full sm:rounded-md rounded-none">
-        <pre data-prefix="~" className="mx-3">
+        <pre data-prefix="~" className="mx-3 bg-inherit">
           <code>{value}</code>
         </pre>
       </div>
