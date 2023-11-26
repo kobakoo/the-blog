@@ -63,8 +63,9 @@ export default function MyComponent() {
       console.log(snapshot);
       toast.success(`画像「${file.name}」は正常にアップロードされました`);
     });
-    const url = await getDownloadURL(storageRef);
-    setProfileImage(url);
+    getDownloadURL(storageRef).then((url) => {
+      setProfileImage(url);
+    });
   }
 
   async function postBlog() {
@@ -307,9 +308,9 @@ export default function MyComponent() {
         <div className="sm:mx-auto lg:w-[800px] md:w-[692px] w-11/12 mx-3  max-w-full mt-6">
           <button
             className="btn bg-blue-500 text-white rounded-full btn-sm hover:bg-blue-700 transition my-3"
-            onClick={() => {
+            onClick={async () => {
               if (file) {
-                fileUpload();
+                await fileUpload();
               }
               postBlog();
             }}
@@ -318,7 +319,7 @@ export default function MyComponent() {
           </button>
         </div>
       ) : (
-        <></>
+        <>Oops!!</>
       )}
     </div>
   );
