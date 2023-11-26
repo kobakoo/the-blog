@@ -126,6 +126,7 @@ export default function MyComponent() {
     "indent",
     "link",
     "code-block",
+    "image",
   ];
   return (
     <div>
