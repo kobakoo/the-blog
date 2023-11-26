@@ -10,13 +10,6 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import { collection, addDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
-import "prismjs/themes/prism.css";
-import Prism from "prismjs";
-
-// 必要な言語のコンポーネントをインポート
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-css";
-
 const ReactQuill = dynamic(
   () => {
     return import("react-quill");
@@ -282,7 +275,6 @@ export default function MyComponent() {
         onChange={(content, delta, source, editor) => {
           const textValue = content;
           setValue(textValue);
-          Prism.highlightAll();
         }}
         modules={modules}
         formats={formats}
