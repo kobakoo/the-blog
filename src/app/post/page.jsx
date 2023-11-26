@@ -62,9 +62,9 @@ export default function MyComponent() {
     await uploadBytes(storageRef, file).then((snapshot) => {
       console.log(snapshot);
       toast.success(`画像「${file.name}」は正常にアップロードされました`);
-    });
-    getDownloadURL(storageRef).then((url) => {
-      setProfileImage(url);
+      getDownloadURL(snapshot.ref).then((url) => {
+        setProfileImage(url);
+      });
     });
   }
 
