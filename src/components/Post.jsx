@@ -145,7 +145,7 @@ function Post(props) {
               </div>
             </div>
             <Image
-              className=" lg:w-[653px] md:w-[576px] sm:w-[414px] w-full max-w-full mx-auto my-0 mb-11"
+              className=" lg:w-[980px] md:w-[692px] sm:w-[414px] w-full max-w-full mx-auto my-0 mb-11"
               src={props.data.thumbnail}
               width={832}
               height={468}
