@@ -17,11 +17,7 @@ export async function generateMetadata({ params }) {
     const category = data.category;
     return {
       metadataBase: new URL("https://blog.kobakoo.com"),
-      title: {
-        default: "The Blog",
-        /** `next-seo`の`titleTemplate`に相当する機能 */
-        template: `%s - The Blog`,
-      },
+      title: siteName,
       description: description,
       category: category,
       authors: ["Kobako"],
