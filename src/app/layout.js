@@ -1,5 +1,5 @@
 import "./globals.css";
-
+import Script from "next/script";
 export const metadata = {
   title: {
     template: "%s | KBK Blog",
@@ -61,6 +61,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2865457642883268"
+        crossorigin="anonymous"
+      />
       <body>{children}</body>
     </html>
   );
